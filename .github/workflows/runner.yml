@@ -18,22 +18,22 @@ jobs:
 # #     - name: Find vulnerable packages
 # #       run: npm audit
   codeql:
-    uses: rewanthtammana/centralized-workflows/.github/workflows/codeql-analysis.yml@main
+    uses: inders-poc/centralized-workflows/.github/workflows/codeql-analysis.yml@main
     
   nodejs-sca-checks:
-    uses: rewanthtammana/centralized-workflows/.github/workflows/nodejs-sca.yml@main
+    uses: inders-poc/centralized-workflows/.github/workflows/nodejs-sca.yml@main
 
   image-scan:
-    uses: rewanthtammana/centralized-workflows/.github/workflows/trivy.yml@main
+    uses: inders-poc/centralized-workflows/.github/workflows/trivy.yml@main
   
   secret-scanning:
-    uses: rewanthtammana/centralized-workflows/.github/workflows/gitleaks.yml@main
+    uses: inders-poc/centralized-workflows/.github/workflows/gitleaks.yml@main
 
   checkov-scanning:
-    uses: rewanthtammana/centralized-workflows/.github/workflows/checkov.yml@main
+    uses: inders-poc/centralized-workflows/.github/workflows/checkov.yml@main
 
   nodejs-sast-scanning:
-    uses: rewanthtammana/centralized-workflows/.github/workflows/nodejs-sast.yml@main
+    uses: inders-poc/centralized-workflows/.github/workflows/nodejs-sast.yml@main
 
   build:
 
@@ -54,7 +54,7 @@ jobs:
     - run: npm install
       
   publish:
-    uses: rewanthtammana/centralized-workflows/.github/workflows/publish.yml@main
+    uses: inders-poc/centralized-workflows/.github/workflows/publish.yml@main
     needs: build
     with:
       image_name: testinguser883/central-hello-world
