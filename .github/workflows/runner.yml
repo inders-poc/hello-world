@@ -20,9 +20,8 @@ jobs:
   codeql:
     uses: inders-poc/centralized-workflows/.github/workflows/codeql-analysis.yml@main
     
-#  nodejs-sca-checks:
- #   uses: inders-poc/centralized-workflows/.github/workflows/nodejs-sca.yml@main
-
+  nodejs-sca-checks:
+    uses: inders-poc/centralized-workflows/.github/workflows/nodejs-sca.yml@main
   image-scan:
     uses: inders-poc/centralized-workflows/.github/workflows/trivy.yml@main
   
