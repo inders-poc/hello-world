@@ -2,7 +2,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "rewanthtammana-patch-2" ]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 #   workflow_dispatch:
