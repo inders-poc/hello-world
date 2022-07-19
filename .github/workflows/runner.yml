@@ -30,7 +30,6 @@ jobs:
 
   checkov-scanning:
     uses: inders-poc/centralized-workflows/.github/workflows/checkov.yml@main
-
   nodejs-sast-scanning:
     uses: inders-poc/centralized-workflows/.github/workflows/nodejs-sast.yml@main
 
