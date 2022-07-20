@@ -2,34 +2,20 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master1" ]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-#   workflow_dispatch:
 
 jobs:
-#   pre-build-checks:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout code
-#       uses: actions/checkout@v3
-#     - name: Generate package.lock json
-#       run: npm i --package-lock-only
-# #     - name: Find vulnerable packages
-# #       run: npm audit
   codeql:
     uses: inders-poc/centralized-workflows/.github/workflows/codeql-analysis.yml@main
     
   nodejs-sca-checks:
     uses: inders-poc/centralized-workflows/.github/workflows/nodejs-sca.yml@main
-#  image-scan:
-#    uses: inders-poc/centralized-workflows/.github/workflows/trivy.yml@main
   
   secret-scanning:
     uses: inders-poc/centralized-workflows/.github/workflows/gitleaks.yml@main
-
- # checkov-scanning:
-  #  uses: inders-poc/centralized-workflows/.github/workflows/checkov.yml@main
+    
   nodejs-sast-scanning:
     uses: inders-poc/centralized-workflows/.github/workflows/nodejs-sast.yml@main
 
