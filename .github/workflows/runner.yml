@@ -55,7 +55,7 @@ jobs:
     uses: inders-poc/centralized-workflows/.github/workflows/publish.yml@main
     needs: build
     with:
-      image_name: testinguser883/central-hello-world
+      image_name: ipsindersingh/central-hello-world
       tag: mil1
     secrets:
       registry_username: ${{secrets.DOCKER_USERNAME}}
