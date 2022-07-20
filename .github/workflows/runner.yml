@@ -62,7 +62,7 @@ jobs:
       registry_password: ${{secrets.DOCKER_PASSWORD}}
       
   update:
-    name: Push to github respository
+    name: Trigger Argocd
     needs: publish
     runs-on: ubuntu-latest
     steps:
