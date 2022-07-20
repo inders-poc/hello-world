@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "jest"
+    "test": " yarn jest --reporters=default --reporters=jest-junit"
   },
   "repository": {
     "type": "git",
