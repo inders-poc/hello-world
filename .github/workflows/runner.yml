@@ -63,6 +63,7 @@ jobs:
       
   update:
     name: Push to github respository
+    needs: publish
     runs-on: ubuntu-latest
     steps:
       - name: commit github
