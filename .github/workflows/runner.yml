@@ -48,7 +48,12 @@ jobs:
       uses: test-summary/action@v1
       with:
           paths: "junit.xml"
-          if: always()
+      if: always()
+    - uses: actions/upload-artifact@v3
+      name: Upload Artifacts
+      with:
+        name: my-artifact
+        path: junit.xml
       
   publish:
     uses: inders-poc/centralized-workflows/.github/workflows/publish.yml@main
