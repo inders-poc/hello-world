@@ -81,6 +81,6 @@ jobs:
 #       with:
 #         context: .
 #         push: true
-#         tags: testinguser883/hello-world:latest
+#         tags: ipsindersingh/hello-world:latest
 #     - name: Image digest
 #       run: echo ${{ steps.docker_build.outputs.digest }}
