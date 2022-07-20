@@ -44,7 +44,11 @@ jobs:
           name: JEST Tests            
           path: junit.xml    
           reporter: jest-junit      
-          artifact: test-results
+    - name: Test Summary
+      uses: test-summary/action@v1
+      with:
+          paths: "junit.xml"
+          if: always()
       
   publish:
     uses: inders-poc/centralized-workflows/.github/workflows/publish.yml@main
