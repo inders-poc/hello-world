@@ -10,4 +10,7 @@ on:
 jobs:
   main: 
     uses: inders-poc/centralized-workflows/.github/workflows/main.yml@main
+    secrets:
+      registry_username: ${{secrets.DOCKER_USERNAME}}
+      registry_password: ${{secrets.DOCKER_PASSWORD}}
 
