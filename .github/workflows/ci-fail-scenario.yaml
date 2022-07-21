@@ -1,0 +1,77 @@
+name: Node.js Build-Failure-Scenario
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  codeql:
+    uses: inders-poc/centralized-workflows/.github/workflows/codeql-analysis.yml@main
+  image-scan:
+    uses: inders-poc/centralized-workflows/.github/workflows/trivy.yml@main
+    
+  nodejs-sca-checks:
+    uses: inders-poc/centralized-workflows/.github/workflows/nodejs-sca.yml@main
+  
+  secret-scanning:
+    uses: inders-poc/centralized-workflows/.github/workflows/gitleaks.yml@main
+    
+  nodejs-sast-scanning:
+    uses: inders-poc/centralized-workflows/.github/workflows/nodejs-sast.yml@main
+
+  build:
+
+    runs-on: ubuntu-latest
+    needs: [ nodejs-sca-checks, codeql, secret-scanning, nodejs-sast-scanning]
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm install
+    - run: npm test
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()    
+      with:
+          name: JEST Tests            
+          path: junit.xml    
+          reporter: jest-junit      
+    - name: Test Summary
+      uses: test-summary/action@v1
+      with:
+          paths: "junit.xml"
+      if: always()
+    - uses: actions/upload-artifact@v3
+      name: Upload Artifacts
+      with:
+        name: my-artifact
+        path: junit.xml
+      
+  publish:
+    uses: inders-poc/centralized-workflows/.github/workflows/publish.yml@main
+    needs: build
+    with:
+      image_name: ipsindersingh/central-hello-world
+      tag: mil1
+    secrets:
+      registry_username: ${{secrets.DOCKER_USERNAME}}
+      registry_password: ${{secrets.DOCKER_PASSWORD}}
+      
+  update:
+    name: Trigger Argocd
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: commit github
+        run: echo done with commit
+
