@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/rewanthtammana/hello-world#readme",
   "dependencies": {
-    "express": "4.18.1",
+    "express": "3.0",
     "jest-junit": "^14.0.0"
   },
   "devDependencies": {
